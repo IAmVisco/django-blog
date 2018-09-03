@@ -7,3 +7,7 @@ footer > a {
     font-size: 10pt;
     margin-left: 5px;
 }
+
+footer > p {
+    display: inline-block;
+}

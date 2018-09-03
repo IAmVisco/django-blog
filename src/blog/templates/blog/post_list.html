@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in object_list %}
+        <p>{{ post.datetime|date:'d M H:i' }}</p>
+        <h2 style="display: inline-block"><a href=" {{ post.get_absolute_url }} ">{{ post.title }}</a></h2>
+        <p style="display: inline-block"> by {{ post.author }}</p>
+        <p>{{ post.content }}</p>
+        <hr>
+        {% empty %}
+            <p>No posts</p>
+    {% endfor %}
+{% endblock content %}

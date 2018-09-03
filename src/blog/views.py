@@ -1,9 +1,18 @@
 from django.shortcuts import render, get_list_or_404
-from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from .models import Post
+from .forms import PostForm
+from datetime import datetime
 
 
-class HomeBlogView(View):
-    template_name = 'blog/home.html'
+class PostListView(ListView):
+    model = Post
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
+
+class PostDetailView(DetailView):
+    model = Post
+
+
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
