@@ -2,7 +2,6 @@ from django.shortcuts import render, get_list_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Post
 from .forms import PostForm
-from datetime import datetime
 
 
 class PostListView(ListView):

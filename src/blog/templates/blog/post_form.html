@@ -8,6 +8,6 @@
         <label for="id_content">Content:</label>
         <textarea name="content" required id="id_content" cols="40" rows="10" class="form-control"></textarea>
         <input type="hidden" value="{{ request.user.id }}" name="author">
-        <input type="submit" class="btn btn-primary" value="Save">
+        <input type="submit" class="btn btn-primary" value="Save" style="margin-top: 15px">
     </form>
 {% endblock content %}

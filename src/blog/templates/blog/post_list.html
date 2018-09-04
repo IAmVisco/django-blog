@@ -1,12 +1,20 @@
 {% extends "base.html" %}
+
 {% block content %}
     {% for post in object_list %}
-        <p>{{ post.datetime|date:'d M H:i' }}</p>
-        <h2 style="display: inline-block"><a href=" {{ post.get_absolute_url }} ">{{ post.title }}</a></h2>
-        <p style="display: inline-block"> by {{ post.author }}</p>
-        <p>{{ post.content }}</p>
-        <hr>
+        <a href="{{ post.get_absolute_url }}" class="post-link">
+            <div class="post">
+                <h2 style="display: inline-block">{{ post.title }}</h2>
+                <span style="display: inline-block"> by {{ post.author }}</span>
+                <p>{{ post.content }}</p>
+                <span class="post-date">{{ post.datetime|date:'d M H:i' }}</span>
+            </div>
+        </a>
         {% empty %}
             <p>No posts</p>
     {% endfor %}
 {% endblock content %}
+
+{% block sidebar %}
+    <a href="{% url 'blog:blog-create' %}" class="btn btn-outline-success" style="width: 100%">Create</a>
+{% endblock sidebar %}

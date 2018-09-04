@@ -2,37 +2,33 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    <h2>Sign In</h2>
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
+    {% if form.errors %}
+        <span style="color: red">{{ form.errors }}</span>
     {% endif %}
-{% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <div class="row">
+        <div class="col-md-6">
+            {% if not user.is_authenticated %}
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username:</label>
+                        <input type="text" name="username" autofocus id="id_username" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password:</label>
+                        <input type="password" name="password" required id="id_password" class="form-control">
+                    </div>
+                    <input type="submit" value="Sign In" class="btn btn-primary">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </form>            
+                <span><a href="{% url 'password_reset' %}">Lost password?</a></span>
+            {% else %}
+                Nigga you w0t
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
