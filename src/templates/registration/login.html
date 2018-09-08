@@ -1,33 +1,19 @@
 {% extends "base.html" %}
-
+{% load widget_tweaks %}
 {% block content %}
 
     <h2>Sign In</h2>
 
     {% if form.errors %}
-        <span style="color: red">{{ form.errors }}</span>
+        {% for errors in form.errors %}
+            <span style="color: red">{{ errors.errors|escape }}</span>
+        {% endfor %}
     {% endif %}
 
     <div class="row">
         <div class="col-md-6">
-            {% if not user.is_authenticated %}
-                <form method="post" action=".">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="id_username">Username:</label>
-                        <input type="text" name="username" autofocus id="id_username" required class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_password">Password:</label>
-                        <input type="password" name="password" required id="id_password" class="form-control">
-                    </div>
-                    <input type="submit" value="Sign In" class="btn btn-primary">
-                    <input type="hidden" name="next" value="{{ next }}">
-                </form>            
-                <span><a href="{% url 'password_reset' %}">Lost password?</a></span>
-            {% else %}
-                Nigga you w0t
-            {% endif %}
+            {% include "bs4_form.html" %}          
+            <span><a href="{% url 'password_reset' %}">Lost password?</a></span>
         </div>
     </div>
 

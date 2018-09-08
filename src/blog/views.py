@@ -22,8 +22,11 @@ class PostCreateView(GetObjectMixin, LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 class PostUpdateView(GetObjectMixin, LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/post_form_update.html'

@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from blog.views import PostListView
 from core.views import signup_view
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', PostListView.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('login/',
+         auth_views.LoginView.as_view(redirect_authenticated_user=True,
+                                      template_name='registration/login.html'), name='login'),
+    path('', include('django.contrib.auth.urls')),
     path('blog/', include('blog.urls')),
     path('signup/', signup_view, name='signup'),
 ]
